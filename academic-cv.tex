@@ -1,0 +1,288 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Graduate Curriculum Vitae
+% LaTeX Template
+% Version 1.1 (9/12/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Rensselaer Polytechnic Institute (http://www.rpi.edu/dept/arc/training/latex/resumes/)
+%
+% Important note:
+% This template requires the res.cls file to be in the same directory as the
+% .tex file. The res.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[margin, 10pt]{res} % Use the res.cls style, the font size can be changed to 11pt or 12pt here
+
+\usepackage{helvet} % Default font is the helvetica postscript font
+%\usepackage{newcent} % To change the default font to the new century schoolbook postscript font uncomment this line and comment the one above
+
+
+
+\usepackage{hyperref}
+%\hypersetup{
+%    colorlinks=false,
+%    linkcolor=black,
+%    filecolor=black,      
+%    urlcolor=black,
+%}
+
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={black!50!black},
+    urlcolor=black,
+}
+
+
+\urlstyle{same}
+\usepackage{etaremune}
+\setlength{\textwidth}{5.1in} % Text width of the document
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND ADDRESS SECTION
+%----------------------------------------------------------------------------------------
+
+\moveleft.5\hoffset\centerline{\large\bf Rafay Mohiuddin} % Your name at the top
+
+\moveleft\hoffset\vbox{\hrule width\resumewidth height 0.5pt}\smallskip % Horizontal line after name; adjust line thickness by changing the '1pt'
+
+\moveleft.5\hoffset\centerline{Paul-Hindemith-Allee 6, App 307, 80939 Munich, Germany}
+%\moveleft.5\hoffset\centerline{House - 29/1, Street - 17, 75100 Karachi, Pakistan}
+
+%\moveleft.5\hoffset\centerline{rafay.mohiuddin@tum.de, +49-178-3717208}
+\moveleft.5\hoffset\centerline{rafay.mohiuddin@tum.de, +49-178-3717208}
+
+\moveleft.5\hoffset\centerline{\href{https://www.linkedin.com/in/rafaymohiuddin/}{Linkedin}}% - \href{https://www.linkedin.com/rafaymohiuddin}{Github}} % Your address
+%----------------------------------------------------------------------------------------
+
+\begin{resume}
+
+%----------------------------------------------------------------------------------------
+%	PRINCIPAL INTEREST
+%----------------------------------------------------------------------------------------
+
+
+%\section{Principal \\ Interest}  
+
+%Computational modeling and simulation, robotics, computer vision, ariel vehicles
+
+
+%----------------------------------------------------------------------------------------
+%	ACADEMIC BACKGROUND
+%----------------------------------------------------------------------------------------
+ 
+\section{Academic \\Background}
+
+%\emph{MSc - School of Engineering \& Design} \hfill {\small Oct, 2021-Present} \\
+\emph{MSc - Computational Mechanics} \hfill Oct, 2021-Present \\
+\href{https://www.tum.de/en/}{\textbf{Technical University of Munich} }, Munich, Germany 
+\begin{itemize}
+%\item Major: Computational Mechanics | Optimization Methods
+%\item Focus Area: Optimization Methods Simulation, Robotics Perception
+%\item Course Work: \\ \\
+%\begin{tabular}{ l l }
+%\bf{\emph{Mechanics}} & \bf{\emph{Computation}} \\
+%Finite Element Method & Computation in Engineering I  \\
+%Computational Fluid Dynamics & Computation in Engineering II \\
+%Computational Material Modeling I & Professional Software Development   \\
+%Continuum Mechanics & AI in Computational Mechanics \\
+%AI in Computational Mechanics & Introduction to Deep Learning \\
+%Advance Fluid Mechanics & Computational Linear Algebra \\
+%Computational Design and Fabrication & Engineering Databases \\
+%\end{tabular}
+
+\end{itemize} 
+
+\emph{BE - Depart. of Mechanical \& Manufacturing Engineering } \hfill {\small Dec, 2015-Aug, 2019} \\
+%\emph{BE - Mechanical Engineering} \hfill Dec, 2015-Aug, 2019 \\
+\href{https://www.neduet.edu.pk/}{\textbf{NED University of Engineering and Technology}}, Karachi, Pakistan
+\begin{itemize}
+%\item Major: Mechanical Engineering| Engineering Simulation, Control Systems
+%\item Focus areas: Engineering Simulation, Robotics and Control.
+\item Thesis: Numerical Investigation of heat transfer enhancement techniques in Impinging Jets. Publication: \href{https://doi.org/10.1002/htj.21986}{[1]}, \href{https://www.dl.begellhouse.com/references/4c8f5faa331b09ea,212bf76947bffc03,5aa059fb1b898ef8.html}{[2]}
+%\item CGPA: 3.883
+\end{itemize} 
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	EXPERIENCE
+%----------------------------------------------------------------------------------------
+ 
+\section{Work\\ Experience \\}
+
+%% Present Job
+\emph{Scientific Assistant - Visual Inertial Odometery and Mapping } \hfill {\small Jul, 2022-Present} \\
+\href{https://www.tum.de/en/}{\textbf{Technical University of Munich} }, Munich, Germany
+\begin{itemize}
+\item Working as HiWi for development of mapping system using LiDAR and RGBD cameras at \href{https://www.cms.bgu.tum.de/de/}{\emph{ Chair of Computational Modeling and Simulation}}.
+   \begin{itemize}
+    \item Consolidated workflow for evaluating extrinsic camera parameters for spinning lidar and camera calibration, in absence of reference (checkerboard).
+    \item Implemented libraries for SLAM implementing on LiDAR. Updated code to support Ouster32 spinning LiDAR. 
+    \item Working on dockerized implementation of libraries, and sensor communication at distance using nimbro-network.
+    
+    %\item  Wrote parallelized, robust C++ code for sizing of 3D print specimen in real-time using OpenCV.
+    %\item Using RCNN, trained a classifier by augmenting custom data dataset to segment and size 3D printed specimen in noisy surrounding.
+    %\item Design control mechanism for UR10e robot attached to a linear axis in ROS2.
+    \end{itemize}
+\end{itemize}
+
+%\emph{Software Lab / Internship} \hfill {\small Apr, 2022-Feb, 2023} \\
+%\href{https://www.tum.de/en/}{\textbf{Technical University of Munich} }, Munich, Germany
+%\begin{itemize}
+%\item Working on development of optical process control for additive manufacturing at  %\href{https://www.cms.bgu.tum.de/de/}{\emph{ Chair of Computational Modeling and Simulation}} as a part of Software Lab (6 ECTS) practical course.
+%   \begin{itemize}
+%   \item Configure ZED mini2 (RGBD camera) in Jetson TX2, for an additive manufacturing setup that utilizes UR10 robot.
+%    \item  Developed optical dimensional measurement system  using open CV and ZED mini2 for real dimensional assessment of extruded layer.
+%    \item Working on methodology for creating 3D scan of printed specimen for real time monitoring application.
+    %\item Using RCNN, trained a classifier by augmenting custom data dataset to segment and size 3D printed specimen in noisy surrounding.
+    %\item Design control mechanism for UR10e robot attached to a linear axis in ROS2.
+%    \end{itemize}
+%\end{itemize}
+
+%% First Job
+
+\emph{Research Engineer} \hfill {\small Jul, 2020 -  Oct, 2021} \\
+\href{https://pnec.nust.edu.pk/}{\textbf{National university of Sciences and Technology, \href{https://pnec.nust.edu.pk/}{}}} Karachi, Pakistan
+\begin{itemize}
+
+\item Contributed in diverse set of roles as Research Engineer at \emph{Integrated Navigation Terrestrial Electromagnetic Lab} and \emph{Non Destructive Testing Centre} at NUST University.
+
+
+\item UAV Design Group
+
+   \begin{itemize}
+    \item Created conceptual and preliminary design (aeronautics calculations) for fixed-wing UAVs and VTOL. 
+    \item Led detail design activity to create CAD assembly in Solid works and exporting manufacturing plans.
+    \item Optimized aerodynamics and structural components by conducting CFD, FEA, FSI simulations using ANSYS. % for different design iterations.
+    \item Design test bench and propulsion system for DLE-120 engine. 
+    \end{itemize}
+
+\item Control Group
+
+    \begin{itemize}
+    \item Created model for VTOL, fixed-wing UAVs in X-plane flight simulator.
+    \item Developed setup for PID tuning of autopilot through SITL (software in the loop) simulation by integrating X-plane simulation models with mission planner firmware, for fixed wing UAV.
+    %\item Develop kinematics model for two degrees of freedom gyro-stabilized platform.
+    \end{itemize} 
+    
+
+
+\item Material Testing Group
+
+    \begin{itemize}
+    %\item Studied literature for performed a feasibility study for the use of phased array ultrasonic testing on composites. 
+    \item Collected data obtained from ultrasonic testing of different composite samples with different composite layup schemes, conduct destructive testing  and numeric simulation (ANSYS ACP) of respective samples.
+    \item Collaborated in preparation of course work and conducted lab sessions on calibrating and sizing defects through PAUT (phased array ultrasonic testing) using Omni scan MX8. 
+    \end{itemize} 
+    
+\end{itemize} 
+
+
+%% job
+
+%% Second Job
+
+\emph{Trainee Senior Management} \hfill {\small Mar, 2020 -  Jul, 2020} \\
+\href{http://www.nrlpak.com/}{\textbf{National Refinery Limited, }} Karachi, Pakistan
+\begin{itemize}
+    \item NRL is a petrochemical complex engaged in the production and sale of different petroleum-based products. 
+    \begin{itemize}
+        \item Aided planning and supervision of regular maintenance jobs in fuel refinery area, responsible for production of Naphtha. Utilized SAP (Plant Maintenance) for managing resources and maintaining maintenance record.
+        \item Studied maintenance procedure and root causes of failure behind different rotary equipment installed in the plant.
+        \item Oversee complete overhauling of centrifugal pump, providing main feed to the Naphtha plant
+
+    \end{itemize}
+\end{itemize}
+
+
+%% Second Job
+
+\emph{Research Assistant} \hfill {\small Jun, 2019 -  Jan, 2020} \\
+\href{https://www.neduet.edu.pk/}{\textbf{NED University of Engineering and Technology, \href{https://www.neduet.edu.pk/}{}}} Karachi, Pakistan
+\begin{itemize}
+    \item Assisted research activities in Mechanical Department o NED University under supervision of \href{https://scholar.google.com/citations?user=jOthSmQAAAAJ&hl=en}{Dr-Ing Usman Allauddin}.
+    
+    \begin{itemize}
+        \item Conducted a comparative study to assess different RANS turbulence models for prediction of secondary peek in Nusselt number resulting from a hydraulic jump in jet impingement cooling.
+        \item Extensively reviewed literature and conducted numerical simulations related to impinging jets focusing on the influence of different types of fins, surface topology, pulsating/synthetic jets, and nanofluids on heat transfer characteristics.
+        \item Supervised two undergraduate student research projects. 
+    \end{itemize}
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+%	Publications
+%----------------------------------------------------------------------------------------
+ 
+
+\section{Publications \\}
+\begin{list}
+
+    {\sl Usman Allauddin, Rafay Mohiuddin, Hafiz Mohammad Usman Khan, Naseem Uddin, and Waqar A. Khan. Nanoscale Heat Transfer Investigation of an Array of Impinging Jet Systems with Different Working Fluids under Crossflow with and without Pin Fins. Heat Transfer, (2020)} \href{https://doi.org/10.1002/htj.21986}{DOI}.\
+
+    {\sl U. Allauddin, T. Jamil, M. Shakib, H.M.U. Khan, R. Mohiuddin, M.S. Saeed, H. Ahsan, N. Uddin, Heat transfer enhancement caused by impinging jets of Al2O3-water nanofluid on a micro-pin fin roughened surface under crossflow conditions−A numerical study, Journal of Enhanced Heat Transfer, 27(4) (2020), 367-387} \href{https://www.dl.begellhouse.com/references/4c8f5faa331b09ea,212bf76947bffc03,5aa059fb1b898ef8.html}{DOI}.
+
+\end{list}
+
+
+
+%----------------------------------------------------------------------------------------
+%	Technical Skills
+%----------------------------------------------------------------------------------------
+ 
+
+\section{Technical Skills}      
+    \begin{description}
+   			%\item[OS:] Windows, Linux (Ubunntu).
+				\item[Python:] OOP, NumPy, Pytorch, Pandas, Scikit learn, Matplotlib.
+				%\item[C++:] OOP, Catch2, OpenCV.
+				\item[MATLAB:] Scripting, Simulink, Aerospace Blockset.
+				%\item[Software:] Git, Github. %Jira
+				\item[ANSYS:] Workbench, APDL, Fluent, ACP, Discovery Live. 
+				\item[Solidworks:] Top-down/ Bottom-up assembly modeling (CAD), structural analysis.
+				%\item[MS Office:] Word, PowerPoint, Excel, Outlook, Project, OneNotes.
+				%\item[Hardware:] UR-10 robot, Ouster & Livox LiDAR, ZED RGBD Camera
+				\item[Other: ] C++,ROS, PyTorch,Git, Docker, OpenFoam, LATEX.
+				% \item[Languages:] LATEX, Markdown.
+    \end{description}
+
+
+%----------------------------------------------------------------------------------------
+%	Courses and Certificates
+%----------------------------------------------------------------------------------------
+
+\section{Certificates Courses \\}
+\begin{list} 
+    
+    - Python for Data Science -  UC SanDiago (edx)\\
+    - Machine Learning - Stanford (Coursera) \\
+    - Python Programmer Bootcamp -  Data Science 365 \\
+    - Intro. to CAD, CAM, and CAE -  Fusion 360 (Udemy)\\
+
+\end{list}
+
+\section{Additional \\}
+\begin{list} 
+    
+    - Language: English (IELTS 7.5)\\
+
+
+
+\end{list}
+
+
+
+\end{resume}
+\end{document}
