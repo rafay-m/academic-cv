@@ -1,10 +1,10 @@
 # Curriculum vitae
 
+![cv-1](https://user-images.githubusercontent.com/102142723/197364776-f97e7ba2-3910-4aa0-b029-58810fd55235.png)
+![cv-2](https://user-images.githubusercontent.com/102142723/197364778-64cdd6f4-1785-48e1-ad60-2798307c7b15.png)
 
-![resume-1](https://user-images.githubusercontent.com/102142723/188018629-9f090f06-4dc1-437f-a925-0ba09443a88f.png)![resume-2](https://user-images.githubusercontent.com/102142723/188018654-eb5975e6-07aa-49bf-8c1d-941c700f63d7.png)![resume-3](https://user-images.githubusercontent.com/102142723/188018668-91fed42b-32e7-452a-9db3-6735e0065864.png)
 
-[rafay_cv_01.09.2022.pdf](https://github.com/rafay-m/academic-cv/files/9473573/rafay_cv_01.09.2022.pdf)
-
+[resume_rafay_20Oct22.pdf](https://github.com/rafaymhddn/academic-cv/files/9845366/resume_rafay_20Oct22.pdf)
 
 ### Orignal Author
 
