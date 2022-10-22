@@ -25,6 +25,7 @@
 \usepackage{helvet} % Default font is the helvetica postscript font
 %\usepackage{newcent} % To change the default font to the new century schoolbook postscript font uncomment this line and comment the one above
 
+\usepackage{comment}
 
 
 \usepackage{hyperref}
@@ -57,7 +58,7 @@
 
 \moveleft\hoffset\vbox{\hrule width\resumewidth height 0.5pt}\smallskip % Horizontal line after name; adjust line thickness by changing the '1pt'
 
-\moveleft.5\hoffset\centerline{Paul-Hindemith-Allee 6, App 307, 80939 Munich, Germany}
+\moveleft.5\hoffset\centerline{Karl-Köglsperger-str. 9 / 0502, 80939 Munich, Germany}
 %\moveleft.5\hoffset\centerline{House - 29/1, Street - 17, 75100 Karachi, Pakistan}
 
 %\moveleft.5\hoffset\centerline{rafay.mohiuddin@tum.de, +49-178-3717208}
@@ -104,8 +105,8 @@
 
 \end{itemize} 
 
-\emph{BE - Depart. of Mechanical \& Manufacturing Engineering } \hfill {\small Dec, 2015-Aug, 2019} \\
-%\emph{BE - Mechanical Engineering} \hfill Dec, 2015-Aug, 2019 \\
+%\emph{BE - Depart. of Mechanical \& Manufacturing Engineering } \hfill {\small Dec, 2015-Aug, 2019} \\
+\emph{BE - Mechanical Engineering} \hfill Dec, 2015-Aug, 2019 \\
 \href{https://www.neduet.edu.pk/}{\textbf{NED University of Engineering and Technology}}, Karachi, Pakistan
 \begin{itemize}
 %\item Major: Mechanical Engineering| Engineering Simulation, Control Systems
@@ -124,14 +125,14 @@
 \section{Work\\ Experience \\}
 
 %% Present Job
-\emph{Scientific Assistant - Visual Inertial Odometery and Mapping } \hfill {\small Jul, 2022-Present} \\
+\emph{Scientific Assistant (HiWi) } \hfill {\small Jul, 2022-Present} \\
 \href{https://www.tum.de/en/}{\textbf{Technical University of Munich} }, Munich, Germany
 \begin{itemize}
 \item Working as HiWi for development of mapping system using LiDAR and RGBD cameras at \href{https://www.cms.bgu.tum.de/de/}{\emph{ Chair of Computational Modeling and Simulation}}.
    \begin{itemize}
     \item Consolidated workflow for evaluating extrinsic camera parameters for spinning lidar and camera calibration, in absence of reference (checkerboard).
-    \item Implemented libraries for SLAM implementing on LiDAR. Updated code to support Ouster32 spinning LiDAR. 
-    \item Working on dockerized implementation of libraries, and sensor communication at distance using nimbro-network.
+    \item Implemented different libraries for SLAM implementation on LiDAR using ROS. Updated code to support Ouster32 spinning LiDAR. 
+    \item Working on dockerized implementation of libraries, sensor communication at distance using nimbro-network, and deployment of mapping system on GO1 robot.
     
     %\item  Wrote parallelized, robust C++ code for sizing of 3D print specimen in real-time using OpenCV.
     %\item Using RCNN, trained a classifier by augmenting custom data dataset to segment and size 3D printed specimen in noisy surrounding.
@@ -144,9 +145,9 @@
 %\begin{itemize}
 %\item Working on development of optical process control for additive manufacturing at  %\href{https://www.cms.bgu.tum.de/de/}{\emph{ Chair of Computational Modeling and Simulation}} as a part of Software Lab (6 ECTS) practical course.
 %   \begin{itemize}
-%   \item Configure ZED mini2 (RGBD camera) in Jetson TX2, for an additive manufacturing setup that utilizes UR10 robot.
+%   \item Configure ZED mini2 (RGBD camera) and Jetson TX2, for an additive manufacturing setup that utilizes UR10 robot.
 %    \item  Developed optical dimensional measurement system  using open CV and ZED mini2 for real dimensional assessment of extruded layer.
-%    \item Working on methodology for creating 3D scan of printed specimen for real time monitoring application.
+%    \item Working on methodology for creating 3D scan of printed specimens for real-time monitoring application.
     %\item Using RCNN, trained a classifier by augmenting custom data dataset to segment and size 3D printed specimen in noisy surrounding.
     %\item Design control mechanism for UR10e robot attached to a linear axis in ROS2.
 %    \end{itemize}
@@ -158,16 +159,16 @@
 \href{https://pnec.nust.edu.pk/}{\textbf{National university of Sciences and Technology, \href{https://pnec.nust.edu.pk/}{}}} Karachi, Pakistan
 \begin{itemize}
 
-\item Contributed in diverse set of roles as Research Engineer at \emph{Integrated Navigation Terrestrial Electromagnetic Lab} and \emph{Non Destructive Testing Centre} at NUST University.
+\item Contributed to a diverse set of projects as Research Engineer at \emph{Integrated Navigation Terrestrial Electromagnetic Lab} and \emph{Non Destructive Testing Centre} at NUST University.
 
 
 \item UAV Design Group
 
    \begin{itemize}
     \item Created conceptual and preliminary design (aeronautics calculations) for fixed-wing UAVs and VTOL. 
-    \item Led detail design activity to create CAD assembly in Solid works and exporting manufacturing plans.
+    \item Led detail design activity to create CAD assembly in SolidWorks and exporting of manufacturing plans.
     \item Optimized aerodynamics and structural components by conducting CFD, FEA, FSI simulations using ANSYS. % for different design iterations.
-    \item Design test bench and propulsion system for DLE-120 engine. 
+    \item Design test bench and propulsion system for DLE-120 and JetCat P220  engine.%, ROTAX 914
     \end{itemize}
 
 \item Control Group
@@ -195,6 +196,8 @@
 
 %% Second Job
 
+
+
 \emph{Trainee Senior Management} \hfill {\small Mar, 2020 -  Jul, 2020} \\
 \href{http://www.nrlpak.com/}{\textbf{National Refinery Limited, }} Karachi, Pakistan
 \begin{itemize}
@@ -213,19 +216,22 @@
 \emph{Research Assistant} \hfill {\small Jun, 2019 -  Jan, 2020} \\
 \href{https://www.neduet.edu.pk/}{\textbf{NED University of Engineering and Technology, \href{https://www.neduet.edu.pk/}{}}} Karachi, Pakistan
 \begin{itemize}
-    \item Assisted research activities in Mechanical Department o NED University under supervision of \href{https://scholar.google.com/citations?user=jOthSmQAAAAJ&hl=en}{Dr-Ing Usman Allauddin}.
+    \item Assisted research activities in Mechanical Department o NED University under the supervision of \href{https://scholar.google.com/citations?user=jOthSmQAAAAJ&hl=en}{Dr-Ing Usman Allauddin}.
     
     \begin{itemize}
         \item Conducted a comparative study to assess different RANS turbulence models for prediction of secondary peek in Nusselt number resulting from a hydraulic jump in jet impingement cooling.
         \item Extensively reviewed literature and conducted numerical simulations related to impinging jets focusing on the influence of different types of fins, surface topology, pulsating/synthetic jets, and nanofluids on heat transfer characteristics.
-        \item Supervised two undergraduate student research projects. 
+        \item Supervised research project of two undergraduate student group. 
     \end{itemize}
 \end{itemize}
+
+
 
 %----------------------------------------------------------------------------------------
 %	Publications
 %----------------------------------------------------------------------------------------
- 
+
+ \begin{comment}
 
 \section{Publications \\}
 \begin{list}
@@ -236,8 +242,7 @@
 
 \end{list}
 
-
-
+\end{comment}
 %----------------------------------------------------------------------------------------
 %	Technical Skills
 %----------------------------------------------------------------------------------------
@@ -246,17 +251,27 @@
 \section{Technical Skills}      
     \begin{description}
    			%\item[OS:] Windows, Linux (Ubunntu).
-				\item[Python:] OOP, NumPy, Pytorch, Pandas, Scikit learn, Matplotlib.
-				%\item[C++:] OOP, Catch2, OpenCV.
-				\item[MATLAB:] Scripting, Simulink, Aerospace Blockset.
+				%\item[Python:] OOP, NumPy, Pytorch, Pandas, Scikit learn, Matplotlib.
+				%\item[C++:] OOP, Catch2, ROS
+				%\item[MATLAB:] Scripting, Simulink, Aerospace Blockset.
 				%\item[Software:] Git, Github. %Jira
-				\item[ANSYS:] Workbench, APDL, Fluent, ACP, Discovery Live. 
-				\item[Solidworks:] Top-down/ Bottom-up assembly modeling (CAD), structural analysis.
-				%\item[MS Office:] Word, PowerPoint, Excel, Outlook, Project, OneNotes.
-				%\item[Hardware:] UR-10 robot, Ouster & Livox LiDAR, ZED RGBD Camera
-				\item[Other: ] C++,ROS, PyTorch,Git, Docker, OpenFoam, LATEX.
-				% \item[Languages:] LATEX, Markdown.
+    
+                    \item[Programming:] C++, Python
+                    \item[Framwork:] ROS, OpenCV, Catch2, NumPy, Pytorch,  Matplotlib
+                    \item[Hardware/Robot:] UR-10 robot, F1/10 Car, LiDAR, RGBD Camera, Jetson-TX2
+                    \item[ANSYS:] Workbench, APDL, Fluent, ACP (Composites)
+				\item[Solidworks:] Top-down/ Bottom-up assembly modeling (CAD)
+				%\item[MS Office:] Word, PowerPoint, Excel, Outlook, Project, OneNotes.				
+				\item[Other: ] MATLAB, Simulink, Git, Docker, OpenFoam, LATEX
+    
+                    %\item[Programming:] C++, Python, MATLAB, 
+                    %\item[Framwork:] ROS, OpenCV, Catch2, NumPy, Pytorch,  Matplotlib
+                    %\item[Tools:] Docker, Git\Github
+                    %\item[Design:] Solidworks (Top-down/ Bottom-up assembly modeling (AD)
+                    %\item[Analysis:] ANSYS (Workbench, APDL, Fluent, ACP, Discovery Live. ), OpenFoam
     \end{description}
+
+
 
 
 %----------------------------------------------------------------------------------------
