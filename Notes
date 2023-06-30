@@ -1,3 +1,42 @@
+#include <pcl/point_types.h>
+#include <pcl/point_cloud.h>
+#include <pcl/ModelCoefficients.h>
+#include <pcl/filters/extract_indices.h>
+#include <pcl/features/normal_3d.h>
+
+void splitPointCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr& inputCloud,
+                     pcl::PointCloud<pcl::PointXYZ>::Ptr& surfaceCloud,
+                     pcl::PointCloud<pcl::PointXYZ>::Ptr& edgeCloud)
+{
+  // Compute surface normals
+  pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> ne;
+  ne.setInputCloud(inputCloud);
+  pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>());
+  ne.setSearchMethod(tree);
+  pcl::PointCloud<pcl::Normal>::Ptr normals(new pcl::PointCloud<pcl::Normal>);
+  ne.setKSearch(10); // Set the number of nearest neighbors to use for normal estimation
+  ne.compute(*normals);
+
+  // Create empty containers for surface and edge points
+  surfaceCloud.reset(new pcl::PointCloud<pcl::PointXYZ>);
+  edgeCloud.reset(new pcl::PointCloud<pcl::PointXYZ>);
+
+  // Iterate through the input cloud and classify points as surface or edge points
+  for (std::size_t i = 0; i < inputCloud->size(); ++i)
+  {
+    // Get the surface normal of the current point
+    const pcl::Normal& normal = normals->at(i);
+
+    // Compute the dot product between the surface normal and the point's normal vector
+    // If the dot product is close to 1, the point is classified as a surface point
+    if (std::abs(normal.getNormalVector3fMap().dot(inputCloud->at(i).getNormalVector3fMap())) > 0.9)
+      surfaceCloud->push_back(inputCloud->at(i));
+    else
+      edgeCloud->push_back(inputCloud->at(i));
+  }
+}
+
+
 
 Split Surface & Edges
 
