@@ -1,6 +1,40 @@
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
 #include <pcl/ModelCoefficients.h>
+#include <pcl/segmentation/sac_segmentation.h>
+
+void segmentPointCloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr& inputCloud,
+                       pcl::PointCloud<pcl::PointXYZ>::Ptr& surfaceCloud,
+                       pcl::PointCloud<pcl::PointXYZ>::Ptr& edgeCloud)
+{
+  pcl::SACSegmentation<pcl::PointXYZ> seg;
+  seg.setModelType(pcl::SACMODEL_PLANE); // Use a plane model for segmentation
+  seg.setMethodType(pcl::SAC_RANSAC);    // Use RANSAC algorithm
+  seg.setDistanceThreshold(0.01);        // Set the maximum allowed distance to the model
+  seg.setInputCloud(inputCloud);
+
+  pcl::PointIndices::Ptr inlierIndices(new pcl::PointIndices);
+  pcl::ModelCoefficients::Ptr coefficients(new pcl::ModelCoefficients);
+  seg.segment(*inlierIndices, *coefficients);
+
+  pcl::ExtractIndices<pcl::PointXYZ> extract;
+  extract.setInputCloud(inputCloud);
+  extract.setIndices(inlierIndices);
+  extract.setNegative(false); // Extract the inliers (surface points)
+  extract.filter(*surfaceCloud);
+
+  extract.setNegative(true); // Extract the outliers (edge points)
+  extract.filter(*edgeCloud);
+}
+
+
+
+
+
+
+#include <pcl/point_types.h>
+#include <pcl/point_cloud.h>
+#include <pcl/ModelCoefficients.h>
 #include <pcl/filters/extract_indices.h>
 #include <pcl/features/normal_3d.h>
 
