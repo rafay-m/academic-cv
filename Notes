@@ -1,3 +1,83 @@
+Of course! To convert from x, y, z (translation) and roll, pitch, yaw (Euler angles) to a pose matrix, you'd construct a transformation matrix where the top-left 3x3 portion represents the rotation and the top-right 3x1 portion represents the translation. The bottom row is typically `[0, 0, 0, 1]`.
+
+Here's a Python function that does the conversion using numpy:
+
+```python
+import numpy as np
+
+def pose_to_matrix(x, y, z, roll, pitch, yaw):
+    # Rotation matrix from roll, pitch, yaw
+    R_x = np.array([[1, 0, 0],
+                    [0, np.cos(roll), -np.sin(roll)],
+                    [0, np.sin(roll), np.cos(roll)]])
+    
+    R_y = np.array([[np.cos(pitch), 0, np.sin(pitch)],
+                    [0, 1, 0],
+                    [-np.sin(pitch), 0, np.cos(pitch)]])
+    
+    R_z = np.array([[np.cos(yaw), -np.sin(yaw), 0],
+                    [np.sin(yaw), np.cos(yaw), 0],
+                    [0, 0, 1]])
+    
+    R = np.dot(R_z, np.dot(R_y, R_x))
+
+    # Constructing the full pose matrix
+    matrix = np.eye(4)
+    matrix[0:3, 0:3] = R
+    matrix[0:3, 3] = [x, y, z]
+
+    return matrix
+
+# Example
+x, y, z, roll, pitch, yaw = 1, 2, 3, 0.1, 0.2, 0.3
+print(pose_to_matrix(x, y, z, roll, pitch, yaw))
+```
+
+When you run the example, it will print the pose matrix for the provided x, y, z translation and roll, pitch, yaw Euler angles. Adjust the code as needed if your conventions for roll, pitch, yaw or matrix layout differ.
+
+Certainly! To convert a pose matrix to x, y, z (translation) and roll, pitch, and yaw (Euler angles) using numpy, you would typically be dealing with a 4x4 transformation matrix. This matrix contains both the rotation (usually in the top-left 3x3 portion) and the translation (the top-right 3x1 portion).
+
+Here's a Python function that does this conversion:
+
+```python
+import numpy as np
+
+def matrix_to_pose(matrix):
+    # Extract translation
+    x = matrix[0, 3]
+    y = matrix[1, 3]
+    z = matrix[2, 3]
+    
+    # Extract rotation (roll, pitch, yaw)
+    sy = np.sqrt(matrix[0,0] * matrix[0,0] +  matrix[1,0] * matrix[1,0])
+    
+    singular = sy < 1e-6
+
+    if not singular:
+        roll = np.arctan2(matrix[2,1], matrix[2,2])
+        pitch = np.arctan2(-matrix[2,0], sy)
+        yaw = np.arctan2(matrix[1,0], matrix[0,0])
+    else:
+        roll = np.arctan2(-matrix[1,2], matrix[1,1])
+        pitch = np.arctan2(-matrix[2,0], sy)
+        yaw = 0
+
+    return (x, y, z, roll, pitch, yaw)
+
+# Example
+matrix = np.array([
+    [0.866, -0.5, 0, 1],
+    [0.5, 0.866, 0, 2],
+    [0, 0, 1, 3],
+    [0, 0, 0, 1]
+])
+
+print(matrix_to_pose(matrix))
+```
+
+This function will return the x, y, z translation and the roll, pitch, yaw Euler angles for the given pose matrix. Make sure to adjust the code if your convention for roll, pitch, and yaw or matrix layout is different.
+
+
 To convert a .pcd (Point Cloud Data) file to a .las (LIDAR LAS) file using Python, you can use the `laspy` library. Here's a basic example:
 
 1. First, make sure you have `laspy` installed. If not, install it using pip:
