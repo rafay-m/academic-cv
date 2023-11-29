@@ -1,3 +1,117 @@
+import torch
+TORCH_VERSION = ".".join(torch.__version__.split(".")[:2])
+CUDA_VERSION = torch.__version__.split("+")[-1]
+print("torch: ", TORCH_VERSION, "; cuda: ", CUDA_VERSION)
+
+
+from batch_data_loader import DepthImageDataLoader, ImageDataLoader
+
+import sys
+import numpy as np
+import os, json, cv2, random, sys
+
+sys.path.append('detectron2')
+import detectron2
+from detectron2.utils.logger import setup_logger
+setup_logger()
+
+
+
+# import some common detectron2 utilities
+from detectron2 import model_zoo
+from detectron2.engine import DefaultPredictor
+from detectron2.config import get_cfg
+from detectron2.utils.visualizer import Visualizer
+from detectron2.data import MetadataCatalog, DatasetCatalog
+
+# Detic libraries
+sys.path.insert(0, 'Detic/third_party/CenterNet2/')
+from centernet.config import add_centernet_config
+
+sys.path.insert(0, 'Detic')
+from detic.config import add_detic_config
+from detic.modeling.utils import reset_cls_test
+
+cfg = get_cfg()
+add_centernet_config(cfg)
+add_detic_config(cfg)
+cfg.merge_from_file("Detic/configs/Detic_LCOCOI21k_CLIP_SwinB_896b32_4x_ft4x_max-size.yaml")
+cfg.MODEL.WEIGHTS = 'Detic/models/Detic_LCOCOI21k_CLIP_SwinB_896b32_4x_ft4x_max-size.pth'
+cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.45  # set threshold for this model
+cfg.MODEL.ROI_BOX_HEAD.ZEROSHOT_WEIGHT_PATH = 'rand'
+cfg.MODEL.ROI_HEADS.ONE_CLASS_PER_PROPOSAL = True # For better visualization purpose. Set to False for all classes.
+# cfg.MODEL.DEVICE='cpu' # uncomment this to use cpu-only mode.
+predictor = DefaultPredictor(cfg)
+
+BUILDIN_CLASSIFIER = {
+    'lvis': 'Detic/datasets/metadata/lvis_v1_clip_a+cname.npy',
+    'objects365': 'Detic/datasets/metadata/o365_clip_a+cnamefix.npy',
+    'openimages': 'Detic/datasets/metadata/oid_clip_a+cname.npy',
+    'coco': 'Detic/datasets/metadata/coco_clip_a+cname.npy',
+}
+
+BUILDIN_METADATA_PATH = {
+    'lvis': 'lvis_v1_val',
+    'objects365': 'objects365_v2_val',
+    'openimages': 'oid_val_expanded',
+    'coco': 'coco_2017_val',
+}
+
+vocabulary = 'openimages' # change to 'lvis', 'objects365', 'openimages', or 'coco'
+metadata = MetadataCatalog.get(BUILDIN_METADATA_PATH[vocabulary])
+classifier = BUILDIN_CLASSIFIER[vocabulary]
+num_classes = len(metadata.thing_classes)
+reset_cls_test(predictor.model, classifier, num_classes)
+
+
+folder_path = '/home/appuser/data/ws_thesis/dataset/scannet_dataset/scans/scene0000_00/data/color'
+data_loader = ImageDataLoader(folder_path, 
+                                  start_index=2, 
+                                  end_index=10, 
+                                  stride=2)
+images = data_loader.load_images()
+
+im = images[0]
+
+outputs = predictor(im)
+v = Visualizer(im[:, :, ::-1], metadata)
+out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+out_img = out.get_image()[:, :, ::-1]
+cv2.imwrite(f'scene00.png', out_img)
+
+
+ # class index
+print([metadata.thing_classes[x] for x in outputs["instances"].pred_classes.cpu().tolist()]) # class names
+labels = [metadata.thing_classes[x] for x in outputs["instances"].pred_classes.cpu().tolist()]
+print(labels)
+outputs["instances"].labels = labels
+print(outputs["instances"].scores)
+print(outputs["instances"].pred_classes)
+print(outputs["instances"].pred_boxes)
+print(outputs["instances"].pred_masks)
+print(outputs["instances"].labels)
+
+from feature_extractor import load_sam, get_grounded_mask, plot_grounded_masks
+
+boxes_filt = outputs["instances"].pred_boxes
+scores = outputs["instances"].scores
+pred_phrases = outputs["instances"].labels
+
+iou_threshold = 0.5
+
+from PIL import Image
+
+image = Image.fromarray(images[0])
+
+model_sam = load_sam()
+masks, pred_phrases, boxes_filt = get_grounded_mask(model_sam, image, iou_threshold, boxes_filt, scores, pred_phrases)
+
+
+
+
+
+
+
 Converting a mesh from world coordinates to its local coordinates involves moving the mesh so that its center or a specific reference point is at the origin of the local coordinate system. This can be achieved by computing the transformation that aligns the mesh's center (or another point of interest) to the origin and then applying this transformation.
 
 Here's a simple method to achieve this using Open3D:
