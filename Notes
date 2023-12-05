@@ -1,3 +1,54 @@
+from PIL import Image
+
+def scale_and_crop_image(image_path, bounding_box, scale_factor):
+    """
+    Scales the bounding box by a given factor and crops the image accordingly.
+    Ensures the scaled bounding box does not exceed the image dimensions.
+
+    Parameters:
+    image_path (str): Path to the image file.
+    bounding_box (list): A list of four elements [x1, y1, x2, y2] representing the coordinates
+                         for the top-left (x1, y1) and bottom-right (x2, y2) corners of the 
+                         bounding box.
+    scale_factor (float): Factor to scale the bounding box. Must be greater than 0.
+
+    Returns:
+    PIL.Image: The cropped image.
+    """
+    if scale_factor <= 0:
+        raise ValueError("Scale factor must be greater than 0")
+
+    # Open the image
+    with Image.open(image_path) as img:
+        # Calculate the center of the original bounding box
+        center_x = (bounding_box[0] + bounding_box[2]) / 2
+        center_y = (bounding_box[1] + bounding_box[3]) / 2
+
+        # Calculate the new half-width and half-height
+        half_width = (bounding_box[2] - bounding_box[0]) / 2 * scale_factor
+        half_height = (bounding_box[3] - bounding_box[1]) / 2 * scale_factor
+
+        # Create the new bounding box ensuring it doesn't go beyond the image boundaries
+        new_x1 = max(0, center_x - half_width)
+        new_y1 = max(0, center_y - half_height)
+        new_x2 = min(img.width, center_x + half_width)
+        new_y2 = min(img.height, center_y + half_height)
+
+        new_bounding_box = [new_x1, new_y1, new_x2, new_y2]
+
+        # Crop the image using the new bounding box
+        cropped_img = img.crop(new_bounding_box)
+
+    return cropped_img
+
+# Example usage
+# cropped_image = scale_and_crop_image("path_to_image.jpg", [100, 100, 300, 300], 1.5)
+# cropped_image.show() # This line will display the cropped and scaled image
+
+
+
+
+
 import torch
 TORCH_VERSION = ".".join(torch.__version__.split(".")[:2])
 CUDA_VERSION = torch.__version__.split("+")[-1]
