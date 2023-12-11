@@ -1,3 +1,96 @@
+import plotly.graph_objects as go
+import numpy as np
+import open3d as o3d
+
+def vis_dict_plotly(save_dict):
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(save_dict['coord'])
+
+    unique_labels = np.unique(save_dict['group'])
+    color_map = {label: np.random.rand(3) for label in unique_labels}
+    colors = np.array([color_map[label] for label in save_dict['group']])
+    
+    # Create a Plotly scatter plot for the point cloud
+    scatter = go.Scatter3d(x=np.asarray(pcd.points)[:,0], 
+                           y=np.asarray(pcd.points)[:,1], 
+                           z=np.asarray(pcd.points)[:,2],
+                           mode='markers',
+                           marker=dict(size=2, color=colors))
+
+    # Prepare text annotations
+    annotations = []
+    for label in unique_labels:
+        # Find the centroid of points for each label for placing the text
+        label_points = np.asarray(pcd.points)[np.asarray(save_dict['group']) == label]
+        centroid = np.mean(label_points, axis=0)
+        annotations.append(dict(x=centroid[0], y=centroid[1], z=centroid[2],
+                                text=save_dict['label'][str(label)], # Assuming labels are stored as strings
+                                xanchor="left",
+                                xshift=10,
+                                font=dict(color="black", size=12),
+                                showarrow=False))
+
+    # Create the layout with annotations
+    layout = go.Layout(scene=dict(annotations=annotations),
+                       margin=dict(r=0, l=0, b=0, t=0))
+
+    # Combine the scatter plot and layout in a figure
+    fig = go.Figure(data=[scatter], layout=layout)
+    fig.show()
+
+    return 0
+
+
+
+
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+import open3d as o3d
+
+def vis_dict_matplotlib(save_dict):
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(save_dict['coord'])
+
+    unique_labels = np.unique(save_dict['group'])
+    color_map = {label: np.random.rand(3) for label in unique_labels}
+    colors = np.array([color_map[label] for label in save_dict['group']])
+
+    # Create a Matplotlib figure and a 3D axis
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Scatter plot for points
+    ax.scatter(np.asarray(pcd.points)[:,0], 
+               np.asarray(pcd.points)[:,1], 
+               np.asarray(pcd.points)[:,2], 
+               c=colors, 
+               marker='o', 
+               s=2)  # s is the size of points
+
+    # Annotate each group with text
+    for label in unique_labels:
+        label_points = np.asarray(pcd.points)[np.asarray(save_dict['group']) == label]
+        centroid = np.mean(label_points, axis=0)
+        ax.text(centroid[0], centroid[1], centroid[2], 
+                save_dict['label'][str(label)], 
+                color='black', 
+                fontsize=10)
+
+    # Set labels for axes (optional)
+    ax.set_xlabel('X axis')
+    ax.set_ylabel('Y axis')
+    ax.set_zlabel('Z axis')
+
+    plt.show()
+
+    return 0
+
+
+
+
+
+
 array([[ 5.39207138e+02,  1.89762004e+02,  3.80888016e+02,
         -5.42132212e+00],
        [-1.89754801e+02,  5.39185917e+02,  1.19839901e+02,
