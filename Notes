@@ -1,3 +1,53 @@
+def create_combined_occupancy_grid(point_cloud, combined_min_bound, combined_max_bound, voxel_size):
+    """ Create a 3D occupancy grid for a point cloud within the combined bounds. """
+    pc = o3d.geometry.PointCloud()
+    pc.points = o3d.utility.Vector3dVector(point_cloud)
+    voxel_grid = o3d.geometry.VoxelGrid.create_from_point_cloud(pc, voxel_size)
+
+    dims = ((combined_max_bound - combined_min_bound) / voxel_size).astype(int)
+    occupancy_grid = np.zeros(dims, dtype=bool)
+
+    for voxel in voxel_grid.get_voxels():
+        voxel_index = np.array(voxel.grid_index)
+        grid_index = ((voxel_index * voxel_size + voxel_grid.origin) - combined_min_bound) / voxel_size
+        grid_index = grid_index.astype(int)
+        occupancy_grid[tuple(grid_index)] = True
+
+    return occupancy_grid
+
+def calculate_combined_bounds(point_cloud1, point_cloud2, voxel_size):
+    """ Calculate the combined min and max bounds for two point clouds. """
+    pc1 = o3d.geometry.PointCloud()
+    pc1.points = o3d.utility.Vector3dVector(point_cloud1)
+    min_bound1, max_bound1 = pc1.get_min_bound(), pc1.get_max_bound()
+
+    pc2 = o3d.geometry.PointCloud()
+    pc2.points = o3d.utility.Vector3dVector(point_cloud2)
+    min_bound2, max_bound2 = pc2.get_min_bound(), pc2.get_max_bound()
+
+    combined_min_bound = np.minimum(min_bound1, min_bound2)
+    combined_max_bound = np.maximum(max_bound1, max_bound2)
+
+    return combined_min_bound, combined_max_bound
+
+# Example point clouds
+point_cloud1 = np.random.rand(100, 3)
+point_cloud2 = np.random.rand(100, 3)
+
+# Calculate combined bounds
+voxel_size = 0.05
+combined_min_bound, combined_max_bound = calculate_combined_bounds(point_cloud1, point_cloud2, voxel_size)
+
+# Create occupancy grids
+occupancy_grid1 = create_combined_occupancy_grid(point_cloud1, combined_min_bound, combined_max_bound, voxel_size)
+occupancy_grid2 = create_combined_occupancy_grid(point_cloud2, combined_min_bound, combined_max_bound, voxel_size)
+
+# Calculate IoU
+iou_score = calculate_iou(occupancy_grid1, occupancy_grid2)
+print(f"IoU score: {iou_score}")
+
+
+
 import numpy as np
 import open3d as o3d
 
