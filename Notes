@@ -1,6 +1,54 @@
 import numpy as np
 import open3d as o3d
 
+def create_occupancy_grid(voxel_grid, voxel_size):
+    """ Create a 3D occupancy grid from a voxel grid. """
+    occupied_voxels = np.array([voxel.grid_index for voxel in voxel_grid.get_voxels()])
+    min_bound = voxel_grid.get_min_bound()
+    max_bound = voxel_grid.get_max_bound()
+    dims = ((max_bound - min_bound) / voxel_size).astype(int)
+
+    occupancy_grid = np.zeros(dims, dtype=bool)
+    for v in occupied_voxels:
+        index = ((v - min_bound) / voxel_size).astype(int)
+        occupancy_grid[tuple(index)] = True
+    return occupancy_grid
+
+def calculate_iou(occupancy_grid1, occupancy_grid2):
+    """ Calculate the Intersection over Union (IoU) of two occupancy grids. """
+    intersection = np.logical_and(occupancy_grid1, occupancy_grid2).sum()
+    union = np.logical_or(occupancy_grid1, occupancy_grid2).sum()
+
+    iou = intersection / union if union != 0 else 0
+    return iou
+
+# Example point clouds
+point_cloud1 = np.random.rand(100, 3)
+point_cloud2 = np.random.rand(100, 3)
+
+# Convert point clouds to voxel grids
+voxel_size = 0.05
+pcd1 = o3d.geometry.PointCloud()
+pcd1.points = o3d.utility.Vector3dVector(point_cloud1)
+vg1 = o3d.geometry.VoxelGrid.create_from_point_cloud(pcd1, voxel_size)
+
+pcd2 = o3d.geometry.PointCloud()
+pcd2.points = o3d.utility.Vector3dVector(point_cloud2)
+vg2 = o3d.geometry.VoxelGrid.create_from_point_cloud(pcd2, voxel_size)
+
+# Create occupancy grids
+occupancy_grid1 = create_occupancy_grid(vg1, voxel_size)
+occupancy_grid2 = create_occupancy_grid(vg2, voxel_size)
+
+# Calculate IoU
+iou_score = calculate_iou(occupancy_grid1, occupancy_grid2)
+print(f"IoU score: {iou_score}")
+
+
+
+import numpy as np
+import open3d as o3d
+
 def point_cloud_to_voxel_grid(point_cloud, voxel_size):
     """ Convert point cloud to a voxel grid. """
     pc = o3d.geometry.PointCloud()
