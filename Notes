@@ -1,3 +1,39 @@
+import numpy as np
+import open3d as o3d
+
+def point_cloud_to_voxel_grid(point_cloud, voxel_size):
+    """ Convert point cloud to a voxel grid. """
+    pc = o3d.geometry.PointCloud()
+    pc.points = o3d.utility.Vector3dVector(point_cloud)
+    voxel_grid = o3d.geometry.VoxelGrid.create_from_point_cloud(pc, voxel_size)
+    return voxel_grid
+
+def calculate_iou(voxel_grid1, voxel_grid2):
+    """ Calculate the Intersection over Union (IoU) of two voxel grids. """
+    voxels1 = set(voxel_grid1.get_voxels())
+    voxels2 = set(voxel_grid2.get_voxels())
+
+    intersection = len(voxels1.intersection(voxels2))
+    union = len(voxels1.union(voxels2))
+
+    iou = intersection / union if union != 0 else 0
+    return iou
+
+# Example point clouds
+point_cloud1 = np.random.rand(100, 3)
+point_cloud2 = np.random.rand(100, 3)
+
+# Convert to voxel grids
+voxel_size = 0.05  # adjust voxel size as needed
+voxel_grid1 = point_cloud_to_voxel_grid(point_cloud1, voxel_size)
+voxel_grid2 = point_cloud_to_voxel_grid(point_cloud2, voxel_size)
+
+# Calculate IoU
+iou_score = calculate_iou(voxel_grid1, voxel_grid2)
+print(f"IoU score: {iou_score}")
+
+
+
 import plotly.graph_objects as go
 import numpy as np
 import open3d as o3d
